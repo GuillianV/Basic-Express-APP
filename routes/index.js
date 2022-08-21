@@ -1,33 +1,24 @@
 var express = require('express');
 var router = express.Router();
 require("dotenv").config()
+let User = require("../modules/database/mongoose/models/user")
 //var axios = require("axios")
-
-var client = require("../modules/database/mongodbInit")
-
 
 /* GET home page. */
 router.get('/',  async function(req, res, next) {
 
 
-  try {
-    // Connect to the MongoDB cluster
-    await client.connect();
-
-    // Make the appropriate DB calls
-    console.log(client)
 
 
-    const db = client.db(process.env.DB_NAME);
+  //Search in db corresponding user
+  let user = await User.FindUserById('63022c757b6ecc95bc9c1c9a');
 
-    const collections = await db.collections();
-    collections.forEach (c=>console.log(c.collectionName));
 
-  } catch (e) {
-    console.error(e);
-  } finally {
-    await client.close();
-  }
+  console.log(User)
+
+
+
+
 
 
 
