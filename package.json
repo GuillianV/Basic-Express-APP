@@ -15,6 +15,7 @@
     "express": "~4.16.1",
     "fs": "0.0.1-security",
     "http-errors": "^1.6.3",
+    "jsonwebtoken": "^8.5.1",
     "mongo-sanitize": "^1.1.0",
     "mongodb": "^4.9.0",
     "mongoose": "^6.5.2",
