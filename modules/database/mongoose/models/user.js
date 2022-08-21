@@ -1,4 +1,5 @@
 let mongoose = require("../mongooseInit")
+var sanitize = require('mongo-sanitize');
 
 //Schema
 const UserSchema = new mongoose.Schema({
@@ -21,12 +22,36 @@ UserSchema.methods.UpdateName = async function (_name) {
 const User = mongoose.model('user', UserSchema);
 
 
-//Add Servces
+//Add Queries
 User.FindUserById = async (id) => {
-    let userData =await User.findOne({_id:id});
+    let userData =await User.findOne({_id:sanitize(id)});
     return userData
 
 }
+
+User.CreateUser = async (_name) => {
+
+    let searchUser =  await User.findOne({name:_name}).catch(error => {
+        console.log(error)
+        return null
+    });
+
+    if (searchUser == null){
+
+        let newUser = new User({name: _name, creation: Date.now()})
+        await newUser.save()
+        return newUser;
+
+    } else {
+        console.log("User " + searchUser.name + " Already exist")
+        return null
+    }
+
+
+
+
+}
+
 
 module.exports = User;
 

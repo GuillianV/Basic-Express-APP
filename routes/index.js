@@ -9,17 +9,8 @@ router.get('/',  async function(req, res, next) {
 
 
 
-
-  //Search in db corresponding user
-  let user = await User.FindUserById('63022c757b6ecc95bc9c1c9a');
-
-
-  console.log(User)
-
-
-
-
-
+  let jacob = await User.CreateUser('Jzzacob')
+  console.log(jacob)
 
 
   res.render('index', { title: 'Cadocuir' });
